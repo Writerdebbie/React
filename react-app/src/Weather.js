@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ColorRing } from "react-loader-spinner";
 import "./App.css";
 
 export default function Weather() {
@@ -31,6 +32,7 @@ export default function Weather() {
   let form = (
     <form onSubmit={handleSubmit} className="App">
       <input
+        autoFocus
         className="form1"
         type="search"
         placeholder="Enter a city here..."
@@ -55,11 +57,24 @@ export default function Weather() {
             <img src={weather.icon} alt={weather.description} />
           </li>
           <li>Description: {weather.description}</li>
-          <li>Country: {weather.country}</li>
+          <li>Country Logo: {weather.country}</li>
         </ul>
       </div>
     );
   } else {
-    return <div className="App-header">{form}</div>;
+    return (
+      <div className="App-header">
+        {form}
+        <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="color-ring-loading"
+          wrapperStyle={{}}
+          wrapperClass="color-ring-wrapper"
+          colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+        />
+      </div>
+    );
   }
 }
